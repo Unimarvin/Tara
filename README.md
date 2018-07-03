@@ -10,3 +10,11 @@ Marvin Triebel implemented Tara and provided optimizations for the core algorith
 
 Please note that Tara depends on the tools *Wendy* and *Lola*, which can be found here:
 https://github.com/nlohmann/service-technology.org
+
+## Installation
+
+Please install tara using autotools. For example run the following commands
+
+  autoreconf -i
+  ./configure
+  make
