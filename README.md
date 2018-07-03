@@ -12,9 +12,8 @@ Please note that Tara depends on the tools *Wendy* and *Lola*, which can be foun
 https://github.com/nlohmann/service-technology.org
 
 ## Installation
+Please install tara using autotools. For example, run the following commands
 
-Please install tara using autotools. For example run the following commands
-
-  autoreconf -i
-  ./configure
-  make
+    autoreconf -i
+    ./configure
+    make
