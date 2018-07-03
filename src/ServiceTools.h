@@ -26,7 +26,7 @@
 
 bool isControllable(pnapi::PetriNet &net, bool useWendyOptimization=false);
 void getLolaStatespace(pnapi::PetriNet &net, const std::string &tempFile);
-void computeOG(pnapi::PetriNet &net, std::string outputFile);
-void computeMP(pnapi::PetriNet &net, std::string outputFile);
+void computeOG(pnapi::PetriNet &net, std::string outputFile, bool dot = false);
+void computeMP(pnapi::PetriNet &net, std::string outputFile, bool dot = false);
 
 #endif

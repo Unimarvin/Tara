@@ -146,6 +146,34 @@ int main(int argc, char** argv) {
         status("risk costs given with base %d", Tara::args_info.riskcosts_given);
         transformRiskCosts(& Tara::partialCostFunction, Tara::args_info.riskcosts_arg);
     }
+
+    if(Tara::args_info.inputdot_given) {
+        pnapi::PetriNet inputdotnet = *Tara::net;
+        const std::set<pnapi::Transition*> transitions=inputdotnet.getTransitions();
+        for(std::set<pnapi::Transition*>::iterator it=transitions.begin();it!=transitions.end();++it) {
+          std::stringstream s;
+          pnapi::Transition* t = Tara::net->findTransition((*it)->getName());
+          // add cost in brackets to name
+          s << (*it)->getName() << " [" << Tara::cost(t) << "]";
+          (*it)->setName(s.str().c_str());
+        }
+
+        std::ofstream inputdotFile;
+        inputdotFile.open("input.dot");
+        std::stringstream ss;
+        ss << pnapi::io::dot << inputdotnet;
+        std::string s = ss.str();
+        int pos = 0;
+        for(int i = 0; i < 3; ++i) {
+            pos = s.find("fontname=\"Helvetica\"", pos);
+            s.insert(pos, "fontsize=10 ");
+            pos += 13;
+        }
+        inputdotFile << s;
+        
+        inputdotFile.close();
+    }
+
     if (Tara::resetMap.size() > 0) {
         status("transforming %d Reset- Transitions", Tara::resetMap.size());
         Reset::transformNet();
@@ -155,7 +183,7 @@ int main(int argc, char** argv) {
     | 2. get most permissive Partner MP |
     `----------------------------------*/
 
-    computeMP(*Tara::net, Tara::tempFile.name());
+    computeMP(*Tara::net, Tara::tempFile.name(), false);
      
     // first create automaton partner
     pnapi::Automaton partner;
@@ -266,14 +294,19 @@ int main(int argc, char** argv) {
     if (!bounded) {
         // Every partner is trivially cost-minimal. Thus, return the mpp
         if (Tara::args_info.sa_given) {
-		    message("Any partner is cost-minimal, returning the most-permissive partner.");
-            if (std::string(Tara::args_info.sa_arg).compare("-") != 0) {
-                std::ofstream outputFile;
-                outputFile.open(Tara::args_info.sa_arg);
-                outputFile << partnerStream.rdbuf();
-                outputFile.close();
+            bool dot = Tara::args_info.dot_given;
+            if(dot) {
+                computeOG(*Tara::net, Tara::args_info.sa_arg, true);
             } else {
-    		    cout << partnerStream.rdbuf();
+		    message("Any partner is cost-minimal, returning the most-permissive partner.");
+                if (std::string(Tara::args_info.sa_arg).compare("-") != 0) {
+                    std::ofstream outputFile;
+                    outputFile.open(Tara::args_info.sa_arg);
+                    outputFile << partnerStream.rdbuf();
+                    outputFile.close();
+                } else {
+                    cout << partnerStream.rdbuf();
+                }
             }
     	}
         if (Tara::args_info.og_given) {
@@ -284,7 +317,8 @@ int main(int argc, char** argv) {
                 s += "file '" + std::string(Tara::args_info.og_arg) + "'";
             }
 		    message("Any partner is cost-minimal, %s.", s.c_str());
-            computeOG(*Tara::net, Tara::args_info.og_arg);
+            bool dot = Tara::args_info.dot_given;
+            computeOG(*Tara::net, Tara::args_info.og_arg, dot);
         }
 
     } else { // there exists a partner with a bounded budget 
@@ -349,7 +383,8 @@ int main(int argc, char** argv) {
             }
             message("Computing cost-minimal partner, %s.", s.c_str());
             Tara::modification->setToValue(minBudget);
-            computeMP(*Tara::net, Tara::args_info.sa_arg);
+            bool dot = Tara::args_info.dot_given;
+            computeMP(*Tara::net, Tara::args_info.sa_arg, dot);
     	}
         if (Tara::args_info.og_given) {
             std::string s = "writing operating guidelines to ";
@@ -360,7 +395,8 @@ int main(int argc, char** argv) {
             }
             message("Computing representation of all cost-minimal partners, %s.", s.c_str());
             Tara::modification->setToValue(minBudget);
-            computeOG(*Tara::net, Tara::args_info.og_arg);
+            bool dot = Tara::args_info.dot_given;
+            computeOG(*Tara::net, Tara::args_info.og_arg, dot);
         }
     } 
 

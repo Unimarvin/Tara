@@ -49,6 +49,10 @@ option "og" -
   typestr="FILENAME"
   optional
 
+option "dot" -
+  "Creates a graphviz dot representation of the operating guidelines for the given correctness criterion."
+  flag off
+
 section "Costs"
 sectiondesc="Define the costs."
 
@@ -130,6 +134,10 @@ option "stats" -
   details="The time is measured using the function clock(3). The memory usage is measured using the ps(1) command. Note that memory consumption contains a small overhead.\n"
   flag off
   hidden
+
+option "inputdot" -
+  "Create Dot-File from Input-net (including costs)"
+  flag off
 
 option "randomseed" -
    "set the random seed, used for automated tests"

@@ -92,16 +92,20 @@ bool isControllable(pnapi::PetriNet &net, bool useWendyOptimization) {
 	if(inControllability && line.compare("  result = false;")==0)
 		return false;
     }
-    printf("the wendy result file could not be correct analysed.\n");
+    printf("the wendy result file could not be analysed correctly.\n");
     exit(-1);
     return false;
 }
 
 
-void computeOG(pnapi::PetriNet &net, std::string outputFile) {
+void computeOG(pnapi::PetriNet &net, std::string outputFile, bool dot) {
     
     std::string wendyCommand("wendy --correctness=livelock ");
     wendyCommand+=" --og="+outputFile;
+
+    if(dot) {
+        wendyCommand += " --dot=\"" + outputFile + ".dot\"";
+    }
     
     // create stringstream to store the open net
     std::stringstream ss;
@@ -121,13 +125,18 @@ void computeOG(pnapi::PetriNet &net, std::string outputFile) {
 }
 
 /** computes most permissive partner */
-void computeMP(pnapi::PetriNet &net, std::string outputFile) {
+void computeMP(pnapi::PetriNet &net, std::string outputFile, bool dot) {
 
     // delete existing files...
     std::remove(outputFile.c_str());
 
+    net.normalize();
+
     std::string wendyCommand("wendy --correctness=livelock ");
-    wendyCommand+=" --sa="+outputFile;
+    wendyCommand += " --sa=" + outputFile;
+    if(dot) {
+        wendyCommand += " --dot=\"" + outputFile + ".dot\"";
+    }
 
     // create stringstream to store the open net
     std::stringstream ss;
