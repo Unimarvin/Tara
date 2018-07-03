@@ -1,2 +1,0 @@
-reach p_1_deadlock: I deadlock
-reach p_47_deadlock: N deadlock

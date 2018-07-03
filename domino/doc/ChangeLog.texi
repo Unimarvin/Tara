@@ -1,3 +1,0 @@
-@c <<-- CHANGE START (version information) -->>
-@heading Version 0.9 (04 October 2010)
-@c <<-- CHANGE END -->>

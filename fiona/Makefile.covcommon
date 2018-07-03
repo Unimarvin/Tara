@@ -1,9 +1,0 @@
-# This file contains definitions and rules that are commonly used in
-# src/Makefile.am and tests/Makefile.am for testsuite coverage checking.
-
-COV_SRC_SUFFIX=.cc
-COV_TMP_SUFFIX=.c++
-CXXCOV=cov++ -skip / -EXT $(COV_SRC_SUFFIX) $(COV_TMP_SUFFIX)
-
-cleandeps:
-	$(SED) -i 's/\$(COV_TMP_SUFFIX)$$/$(COV_SRC_SUFFIX)/g' $(builddir)/.deps/*.Po

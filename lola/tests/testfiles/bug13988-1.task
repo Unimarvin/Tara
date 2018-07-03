@@ -1,8 +1,0 @@
-FORMULA
-ALLPATH EVENTUALLY (
-  (p1 > 0) AND
-  ALLPATH NEXTSTEP (
-    ( NOT (p1 > 0) ) AND
-    (ActivityFinalNode1 > 0)
-  )
-)

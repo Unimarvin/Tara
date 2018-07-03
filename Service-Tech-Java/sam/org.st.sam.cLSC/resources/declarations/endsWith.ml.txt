@@ -1,9 +1,0 @@
-fun endsWith(hist: TOKENHIST, histPre: TOKENHIST) =
-(* --- hist ends with histPre if the maximal events of histPre
-         match the maximal events of hist, and if their
-         predecessor events match recursively *)
-let
-  val matched = matchEvents( #max hist, #max histPre)
-in
-  matchPredecessors( matched, hist, histPre, matched )
-end;

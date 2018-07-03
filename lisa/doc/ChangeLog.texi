@@ -1,4 +1,0 @@
-@heading Version 1.0
-@itemize
-@item initial release
-@end itemize

@@ -1,5 +1,0 @@
-{ AG EF (1.internal.final) }
-
-FORMULA
-  ALLPATH ALWAYS EXPATH EVENTUALLY (p7 > 0)
-

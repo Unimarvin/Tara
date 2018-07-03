@@ -1,4 +1,0 @@
-req -> ireq;
-iresp -> resp;
-ireq -> reqprime;
-part1, part2 -> iresp;

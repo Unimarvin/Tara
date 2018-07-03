@@ -1,2 +1,0 @@
-SUBDIRS = cudd alglib #antlr
-

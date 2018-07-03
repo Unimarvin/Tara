@@ -1,4 +1,0 @@
-
-FORMULA(X):
- x <-> AND a b c,
- a, b, c;

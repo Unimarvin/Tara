@@ -1,7 +1,0 @@
-
-FORMULA(X,Y):
-Siphon(X), 
-Nonempty(X),
-MaxTrap(X,Y), 
-Unmarked(Y);
-

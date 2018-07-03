@@ -1,7 +1,0 @@
-
-FORMULA(X):
-Siphon(X),
-Marked(X),
-InSCC(X),
-CoverSCC(X);
-

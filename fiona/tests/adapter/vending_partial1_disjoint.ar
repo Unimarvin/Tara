@@ -1,4 +1,0 @@
-OBSERVABLE DEuro -> MEuro;
--> MCoffeeButton;
--> MTeaButton;
-OBSERVABLE MServedCoffee -> DServedCoffee;

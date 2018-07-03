@@ -1,5 +1,0 @@
-@heading Version 1.0-unreleased
-@itemize
-@item first official release of Candy
-
-@end itemize

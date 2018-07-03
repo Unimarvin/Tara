@@ -1,8 +1,0 @@
-EHandle -> FHandle;
-FAck -> EAck;
-FAck ->;
-FHandle -> FHandle, EAck;
-ETrigger -> FTrigger;
-FDone -> EDone;
-
-

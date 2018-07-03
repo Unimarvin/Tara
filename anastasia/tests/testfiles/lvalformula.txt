@@ -1,3 +1,0 @@
-FORMULA(X):
- x <-> Siphon(X),
- x <-> Trap(Y);

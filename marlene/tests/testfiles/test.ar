@@ -1,6 +1,0 @@
--> MTeaButton;  # This is a comment
-# And this is also a comment
-bla -> MTeaButton, blub;
-    halligalli -> blub;
-
-
